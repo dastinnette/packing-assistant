@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 function Signup() {
     return (
         <Container>
+            <div>
+                <h1>Hdello</h1>
+            </div>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
