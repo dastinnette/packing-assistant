@@ -7,7 +7,9 @@ import Signup from "./Signup"
 function App() {
 
 
-  return <Signup />
+  return (
+    <Signup />
+  ) 
 }
 
 export default App;
