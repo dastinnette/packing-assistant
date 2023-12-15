@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 function Signup({ setUser }) {
-    // const [signup, setSignup] = useState(true)
+    const [signup, setSignup] = useState(true)
     
     const signupSchema = yup.object().shape({
         username: yup.string().min(5, 'Username must be between 5 and 15 characters').max(15, 'Username must be between 5 and 15 characters'),
@@ -26,7 +26,8 @@ function Signup({ setUser }) {
         },
         validationSchema: signupSchema,
         onSubmit: (values) => {
-            fetch('/users', {
+            const endpoint = signup ? '/users' : '/login'
+            fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
@@ -45,10 +46,15 @@ function Signup({ setUser }) {
         }
     })
     
+    function toggleSignup() {
+        setSignup((currentSignup) => !currentSignup)
+    }
+
     return (
         <Container>
             <Row className="justify-content-md-center">
                 <Col lg="6">
+                    <Button onClick={toggleSignup}>{signup ? 'Login instead!' : 'Register for an account'}</Button>
                     <Form onSubmit={formik.handleSubmit}>
                         <Form.Group>
                             <Form.Label>Username</Form.Label>
@@ -60,7 +66,7 @@ function Signup({ setUser }) {
                             />
                         </Form.Group>
 
-                        <Form.Group>
+                        {signup && <Form.Group>
                             <Form.Label>Email address</Form.Label>
                             <Form.Control 
                                 id="email"
@@ -69,7 +75,7 @@ function Signup({ setUser }) {
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
                             />
-                        </Form.Group>
+                        </Form.Group>}
 
                         <Form.Group>
                             <Form.Label>Password</Form.Label>
