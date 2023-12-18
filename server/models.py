@@ -14,6 +14,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
+    trips = db.relationship('Trip', back_populates = 'user', cascade = 'all, delete-orphan')
+    locations = association_proxy('trips', 'location')
 
     @property
     def password_hash(self):
@@ -44,6 +46,8 @@ class Location(db.Model, SerializerMixin):
     plug_adapter = db.Column(db.String)
     img = db.Column(db.String)
     description = db.Column(db.String)
+    trips = db.relationship('Trip', back_populates = 'location', cascade = 'all, delete-orphan')
+    users = association_proxy('trips', 'user')
 
     def __repr__(self):
         return f'<Location {self.id}: {self.name}>'
@@ -56,6 +60,8 @@ class Trip(db.Model, SerializerMixin):
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
     date = db.Column(db.Date)
     packing_list = db.Column(db.String)
+    user = db.relationship('User', back_populates = 'trips')
+    location = db.relationship('Location', back_populates = 'trips')
 
     def __repr__(self):
         return f'<Trip {self.id}: Location {self.location_id}>'

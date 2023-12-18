@@ -10,6 +10,7 @@ from flask_restful import Resource
 from config import app, db, api
 # Add your model imports
 from models import User, Location, Trip
+import datetime
 
 class Users(Resource):
     def post(self):
