@@ -29,3 +29,33 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password_string):
         byte_object = password_string.encode('utf-8')
         return bcrypt.check_password_hash(self.password_hash, byte_object)
+    
+    def __repr__(self):
+        return f'<User {self.id}: {self.username}>'
+    
+class Location(db.Model, SerializerMixin):
+    __tablename__ = 'locations'
+
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String)
+    weather = db.Column(db.String)
+    vaccinations = db.Column(db.String)
+    travel_advisory = db.Column(db.String)
+    plug_adapter = db.Column(db.String)
+    img = db.Column(db.String)
+    description = db.Column(db.String)
+
+    def __repr__(self):
+        return f'<Location {self.id}: {self.name}>'
+    
+class Trip(db.Model, SerializerMixin):
+    __tablename__ = 'trips'
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
+    date = db.Column(db.Date)
+    packing_list = db.Column(db.String)
+
+    def __repr__(self):
+        return f'<Trip {self.id}: Location {self.location_id}>'
