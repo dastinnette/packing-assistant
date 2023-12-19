@@ -58,6 +58,15 @@ class Trips(Resource):
     
 api.add_resource(Trips, '/api/v1/trips')
 
+class TripById(Resource):
+    def get(self, id):
+        trip = Trip.query.get(id)
+        if not trip:
+            return make_response({'erorr': 'trip not found'}, 404)
+        return make_response(trip.to_dict(), 200)
+
+api.add_resource(TripById, '/api/v1/trips/<int:id>')
+
 @app.route('/api/v1/authorized')
 def authorized():
     try:

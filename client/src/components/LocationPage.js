@@ -19,7 +19,7 @@ function LocationPage(){
                 })
             } else {
                 // handle what should happen if not logged in
-                console.log('Error')
+                console.log('Error finding location details')
             }
         })
     },[])

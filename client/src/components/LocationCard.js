@@ -7,7 +7,7 @@ function LocationCard({user, setUser, location, setLocations}){
     const navigate = useNavigate()
 
     return(
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '20rem' }}>
             <Card.Img  src={location.img} />
             <Card.Body>
                 <Card.Title>{location.name}</Card.Title>

@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import LocationCard from "./LocationCard";
 
