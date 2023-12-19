@@ -5,11 +5,12 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource
+import datetime
 
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import User 
+from models import User, Location, Trip
 
 class Users(Resource):
     def post(self):
@@ -21,6 +22,27 @@ class Users(Resource):
         return make_response({'user': user.to_dict()}, 201 )
 
 api.add_resource(Users, '/api/v1/users')  
+
+class Locations(Resource):
+    def get(self):
+        return [[location.to_dict() for location in Location.query.all()], 200]
+    
+api.add_resource(Locations, '/locations')
+
+class LocationById(Resource):
+    def get(self, id):
+        location = Location.query.get(id)
+        if not location:
+            return make_response({'erorr': 'location not found'}, 404)
+        return make_response(location.to_dict(), 200)
+
+api.add_resource(LocationById, '/locations/<int:id>')
+
+class Trips(Resource):
+    def get(self):
+        return [[trip.to_dict() for trip in Trip.query.all()], 200]
+
+api.add_resource(Trips, '/trips')
 
 @app.route('/api/v1/authorized')
 def authorized():

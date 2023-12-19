@@ -57,6 +57,10 @@ function Signup({ setUser }) {
 
     return (
         <Container>
+            <div>
+                <h1>Welcome to Pack Assist</h1>
+                <p>Please sign up or log in below</p>
+            </div>
             <Row className="justify-content-md-center">
                 <Col lg="6">
                     {Object.keys(formik.errors).map((key) => <li>{formik.errors[key]}</li>)}
