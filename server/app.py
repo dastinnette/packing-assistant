@@ -42,6 +42,20 @@ class Trips(Resource):
     def get(self):
         return [[trip.to_dict() for trip in Trip.query.all()], 200]
 
+    def post(self):
+        data = request.get_json()
+        date = data['start_date'].split('-')
+        dateObj = datetime.date(int(date[0]), int(date[1]), int(date[2]))
+        new_trip = Trip(
+            user_id = data['user_id'],
+            location_id = data['location_id'],
+            start_date = dateObj,
+            packing_list = data['packing_list']
+        )
+        db.session.add(new_trip)
+        db.session.commit()
+        return make_response(new_trip.to_dict(), 201)
+    
 api.add_resource(Trips, '/api/v1/trips')
 
 @app.route('/api/v1/authorized')

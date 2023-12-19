@@ -12,7 +12,7 @@ with app.app_context():
     Trip.query.delete()
 
     print("Grabbing User...")
-    user1 = User.query.first()
+    user1 = User.query.get(12)
 
     print("Creating Locations...")
     l1 = Location(name="Bangkok", weather="Jan: 80, Feb: 83, Mar: 85, Apr: 87, May: 86, Jun: 85, Jul: 84, Aug: 84, Sep: 83, Oct: 83, Nov: 82, Dec: 80", 
