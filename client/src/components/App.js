@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 // import { Switch, Route } from "react-router-dom"; 
+import {Outlet} from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 import Signup from "./Signup"
 
 function App() {
   const [user, setUser] = useState(null)
+  const [locations, setLocations] = useState([])
+
+  const context = {user, setUser, locations, setLocations}
 
   useEffect(() => {
     fetch('/authorized')
@@ -14,8 +20,17 @@ function App() {
         resp.json().then((user) => setUser(user))
       } else {
         // handle what should happen if not logged in
-        console.log('error')
+        console.log('No login')
       }
+    }).then(()=>{
+      fetch('/locations')
+      .then((resp)=>{
+        if (resp.ok) {
+          resp.json().then((locations)=> {
+            setLocations(locations)
+          })
+        }
+      })
     })
   }, [])
 
@@ -35,10 +50,12 @@ function App() {
     return <Signup setUser={setUser} />
   }
 
-  return <div>
-    in the site!
-    <Button variant="primary" onClick={handleLogout}>Logout</Button>
-  </div>
+  return (
+    <Container>
+      <Button variant="primary" onClick={handleLogout}>Logout</Button>
+      <Outlet context={context}/>
+    </Container>
+  ) 
 }
 
 export default App;
