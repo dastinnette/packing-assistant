@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {Outlet} from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
 import Signup from "./Signup"
+import NavBar from "./NavBar";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -34,25 +34,14 @@ function App() {
     })
   }, [])
 
-  function handleLogout() {
-    fetch('/logout', {
-      method: 'DELETE'
-    }).then((resp) => {
-      if (resp.ok) {
-        //  handle logout on frontend
-        setUser(null)
-        // naigate to route
-      }
-    })
-  }
-
   if(ready) {
     if (!user) {
       return <Signup setUser={setUser} />
     }
     return (
       <Container>
-        <Button variant="primary" onClick={handleLogout}>Logout</Button>
+        <NavBar setUser={setUser}/>
+        {/* <Button variant="primary" onClick={handleLogout}>Logout</Button> */}
         <Outlet context={context}/>
       </Container>
     ) 

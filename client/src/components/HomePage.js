@@ -8,7 +8,8 @@ function HomePage(){
 
     return(
         <div>
-            <Button onClick={()=>navigate('/locations')}> View Locations</Button>
+            <h1>Welcome to Pack Assist!</h1>
+            <p>instructions how to use app...</p>
         </div>
     )
 }
