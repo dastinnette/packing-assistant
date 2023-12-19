@@ -27,7 +27,7 @@ class Locations(Resource):
     def get(self):
         return [[location.to_dict() for location in Location.query.all()], 200]
     
-api.add_resource(Locations, '/locations')
+api.add_resource(Locations, '/api/v1/locations')
 
 class LocationById(Resource):
     def get(self, id):
@@ -36,13 +36,13 @@ class LocationById(Resource):
             return make_response({'erorr': 'location not found'}, 404)
         return make_response(location.to_dict(), 200)
 
-api.add_resource(LocationById, '/locations/<int:id>')
+api.add_resource(LocationById, '/api/v1/locations/<int:id>')
 
 class Trips(Resource):
     def get(self):
         return [[trip.to_dict() for trip in Trip.query.all()], 200]
 
-api.add_resource(Trips, '/trips')
+api.add_resource(Trips, '/api/v1/trips')
 
 @app.route('/api/v1/authorized')
 def authorized():
