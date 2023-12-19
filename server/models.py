@@ -16,6 +16,7 @@ class User(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
     trips = db.relationship('Trip', back_populates = 'user', cascade = 'all, delete-orphan')
     locations = association_proxy('trips', 'location')
+    serialize_rules = ('-trips.user', '-locations.users')
 
     @property
     def password_hash(self):
@@ -48,6 +49,7 @@ class Location(db.Model, SerializerMixin):
     description = db.Column(db.String)
     trips = db.relationship('Trip', back_populates = 'location', cascade = 'all, delete-orphan')
     users = association_proxy('trips', 'user')
+    serialize_rules = ('-trips.location', '-users.location')
 
     def __repr__(self):
         return f'<Location {self.id}: {self.name}>'
@@ -62,6 +64,7 @@ class Trip(db.Model, SerializerMixin):
     packing_list = db.Column(db.String)
     user = db.relationship('User', back_populates = 'trips')
     location = db.relationship('Location', back_populates = 'trips')
+    serialize_rules = ('-location.trips', '-users.trip')
 
     def __repr__(self):
         return f'<Trip {self.id}: Location {self.location_id}>'

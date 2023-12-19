@@ -23,6 +23,21 @@ class Users(Resource):
 
 api.add_resource(Users, '/api/v1/users')  
 
+class Locations(Resource):
+    def get(self):
+        return [[location.to_dict() for location in Location.query.all()], 200]
+    
+api.add_resource(Locations, '/locations')
+
+class LocationById(Resource):
+    def get(self, id):
+        location = Location.query.get(id)
+        if not location:
+            return make_response({'erorr': 'location not found'}, 404)
+        return make_response(location.to_dict(), 200)
+
+api.add_resource(LocationById, '/locations/<int:id>')
+
 @app.route('/api/v1/authorized')
 def authorized():
     try:
