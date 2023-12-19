@@ -1,15 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function LocationCard({user, setUser, location, setLocations}){
-    
+    const navigate = useNavigate()
+
     return(
         <Card style={{ width: '18rem' }}>
             <Card.Img  src={location.img} />
             <Card.Body>
                 <Card.Title>{location.name}</Card.Title>
-                {/* <Card.Text>{location.description}</Card.Text> */}
-                <Button variant="primary">Learn More</Button>
+                <Button variant="primary" onClick={()=>navigate(`/locations/${location.id}`)}>Learn More</Button>
             </Card.Body>
         </Card>
     )
