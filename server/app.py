@@ -5,12 +5,12 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource
+import datetime
 
 # Local imports
 from config import app, db, api
 # Add your model imports
 from models import User, Location, Trip
-import datetime
 
 class Users(Resource):
     def post(self):
