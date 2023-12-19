@@ -38,6 +38,12 @@ class LocationById(Resource):
 
 api.add_resource(LocationById, '/locations/<int:id>')
 
+class Trips(Resource):
+    def get(self):
+        return [[trip.to_dict() for trip in Trip.query.all()], 200]
+
+api.add_resource(Trips, '/trips')
+
 @app.route('/api/v1/authorized')
 def authorized():
     try:
