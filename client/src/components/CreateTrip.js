@@ -75,7 +75,7 @@ function CreateTrip({ location }){
                             <Form.Control
                                 id="packing_list" 
                                 as="textarea"
-                                placeholder="What are you going to pack?" 
+                                placeholder="What do you need to pack?" 
                                 value={formik.values.packing_list}
                                 onChange={formik.handleChange}
                             />

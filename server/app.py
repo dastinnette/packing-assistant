@@ -62,8 +62,16 @@ class TripById(Resource):
     def get(self, id):
         trip = Trip.query.get(id)
         if not trip:
-            return make_response({'erorr': 'trip not found'}, 404)
+            return make_response({'error': 'trip not found'}, 404)
         return make_response(trip.to_dict(), 200)
+    
+    def delete(self, id):
+        trip = Trip.query.filter_by(id=id).first()
+        if not trip:
+            return make_response({'error': 'trip not found'}, 404)
+        db.session.delete(trip)
+        db.session.commit()
+        return make_response('', 204)
 
 api.add_resource(TripById, '/api/v1/trips/<int:id>')
 

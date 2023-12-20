@@ -21,6 +21,7 @@ function TripsPage(){
 
     return(
         <Container>
+            <br></br>
             <Row>
                 {tripCards}
             </Row>

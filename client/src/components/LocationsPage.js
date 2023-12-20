@@ -10,6 +10,7 @@ function LocationsPage(){
     
     return (
         <Container>
+            <br></br>
             <Row>
                 {locationCards}
             </Row>

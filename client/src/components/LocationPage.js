@@ -60,6 +60,7 @@ function LocationPage(){
                     <CreateTrip location={location} locationId={locationId}/>
                 </Col>
             </Row>
+            <br></br>
         </Container>
     )
 }
