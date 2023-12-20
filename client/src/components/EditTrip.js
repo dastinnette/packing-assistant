@@ -66,8 +66,7 @@ function EditTrip({ tripDetails, location, setTrip }){
                             <Form.Label>Departure date</Form.Label>
                             <Form.Control 
                                 id="date"
-                                type="text"
-                                placeholder="YYYY-MM-DD" 
+                                type="date"
                                 value={formik.values.date}
                                 onChange={formik.handleChange}
                             />
