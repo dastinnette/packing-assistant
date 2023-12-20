@@ -65,6 +65,24 @@ class TripById(Resource):
             return make_response({'error': 'trip not found'}, 404)
         return make_response(trip.to_dict(), 200)
     
+    def patch(self, id):
+        trip = Trip.query.filter_by(id=id).first()
+        if trip:
+            try:
+                params = request.json
+                data = {
+                    'user_id': int(params['user_id']),
+                    'location_id': int(params['location_id'])
+                }
+                for attr in data:
+                    setattr(trip, attr, data[attr])
+                db.session.commit()
+                return make_response(trip.to_dict(), 202)
+            except ValueError as v_error:
+                return make_response({"error": str(v_error)}, 400)
+        else:
+            return make_response({"error": "Trip not found"}, 404)
+    
     def delete(self, id):
         trip = Trip.query.filter_by(id=id).first()
         if not trip:

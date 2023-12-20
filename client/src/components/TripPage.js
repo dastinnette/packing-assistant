@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import EditTrip from "./EditTrip";
 
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/esm/Container";
@@ -11,6 +12,7 @@ import Button from "react-bootstrap/esm/Button";
 function TripPage(){
     const {tripId} = useParams()
     const [trip, setTrip] = useState(null)
+    const [editTrip, setEditTrip] = useState(false)
     const nav = useNavigate()
     
     useEffect(() => {
@@ -27,8 +29,12 @@ function TripPage(){
         })
     },[])
 
-    function editTrip(){
+    function handleEdit(){
+        
+    }
 
+    function toggleEdit(){
+        setEditTrip((currentEditTrip) => !currentEditTrip)
     }
 
     function deleteTrip() {
@@ -60,12 +66,13 @@ function TripPage(){
                             <Card.Text>
                                 Packing List: {trip.packing_list}
                             </Card.Text>
-                            <Button variant="primary" onClick={editTrip}>Edit Trip</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button variant="primary" onClick={toggleEdit}>{editTrip ? 'Go back' : 'Edit Trip'}</Button>&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button variant="danger" onClick={deleteTrip}>Delete Trip</Button>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col>
+                    {editTrip && <EditTrip location={trip.location}/>}
                 </Col>
             </Row>
         </Container>
