@@ -69,8 +69,9 @@ with app.app_context():
     print("Creating Trips...")
     t1 = Trip(user=user1, location=l1, date=date(2024, 12, 25), packing_list="pants and shoes")
     t2 = Trip(user=user1, location=l7, date=date(2025, 6, 7), packing_list="swimsuit and towel")
+    t3 = Trip(user=user1, location=l6, date=date(2025, 12, 22), packing_list="swimsuit and towel")
 
-    trips=[t1, t2]
+    trips=[t1, t2, t3]
 
     db.session.add_all(locations)
     db.session.add_all(trips)

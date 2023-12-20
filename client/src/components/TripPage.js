@@ -27,6 +27,10 @@ function TripPage(){
         })
     },[])
 
+    function editTrip(){
+
+    }
+
     function deleteTrip() {
         fetch(`/trips/${tripId}`, {
             method: "DELETE"
@@ -56,7 +60,7 @@ function TripPage(){
                             <Card.Text>
                                 Packing List: {trip.packing_list}
                             </Card.Text>
-                            <Button variant="primary" >Edit Trip</Button>
+                            <Button variant="primary" onClick={editTrip}>Edit Trip</Button>&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button variant="danger" onClick={deleteTrip}>Delete Trip</Button>
                         </Card.Body>
                     </Card>
