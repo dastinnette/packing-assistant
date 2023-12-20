@@ -14,6 +14,7 @@ function LocationsPage(){
             <Row>
                 {locationCards}
             </Row>
+            <br></br>
         </Container>
     )
 }
