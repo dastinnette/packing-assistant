@@ -44,12 +44,12 @@ class Trips(Resource):
 
     def post(self):
         data = request.get_json()
-        date = data['start_date'].split('-')
-        dateObj = datetime.date(int(date[0]), int(date[1]), int(date[2]))
+        input_date = data['date'].split('-')
+        dateObj = datetime.date(int(input_date[0]), int(input_date[1]), int(input_date[2]))
         new_trip = Trip(
             user_id = data['user_id'],
             location_id = data['location_id'],
-            start_date = dateObj,
+            date = dateObj,
             packing_list = data['packing_list']
         )
         db.session.add(new_trip)

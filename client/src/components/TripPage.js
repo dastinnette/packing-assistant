@@ -30,6 +30,7 @@ function TripPage(){
 
     return(
         <Container>
+            <br></br>
             <Row>
                 <Col>
                     <Card>

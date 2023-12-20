@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/esm/Container";
+import CreateTrip from "./CreateTrip";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 
@@ -30,6 +31,7 @@ function LocationPage(){
  
     return(
         <Container>
+            <br></br>
             <Row>
                 <Col>
                     <Card>
@@ -55,6 +57,7 @@ function LocationPage(){
                     </Card>
                 </Col>
                 <Col>
+                    <CreateTrip location={location} locationId={locationId}/>
                 </Col>
             </Row>
         </Container>

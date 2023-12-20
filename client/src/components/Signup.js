@@ -109,7 +109,7 @@ function Signup({ setUser }) {
                                 onChange={formik.handleChange}
                             />
                         </Form.Group>}
-                        
+                        <br></br>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
