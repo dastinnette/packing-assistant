@@ -69,13 +69,19 @@ class TripById(Resource):
         trip = Trip.query.filter_by(id=id).first()
         if trip:
             try:
-                params = request.json
-                data = {
-                    'user_id': int(params['user_id']),
-                    'location_id': int(params['location_id'])
-                }
-                for attr in data:
-                    setattr(trip, attr, data[attr])
+                data = request.get_json()
+                input_date = data['date'].split('-')
+                dateObj = datetime.date(int(input_date[0]), int(input_date[1]), int(input_date[2]))
+                setattr(trip, 'user_id', data['user_id'])
+                setattr(trip, 'location_id', data['location_id'])
+                setattr(trip, 'date', dateObj)
+                setattr(trip, 'packing_list', data['packing_list'])
+                # data = {
+                #     'user_id': int(params['user_id']),
+                #     'location_id': int(params['location_id'])
+                # }
+                # for attr in data:
+                #     setattr(trip, attr, data[attr])
                 db.session.commit()
                 return make_response(trip.to_dict(), 202)
             except ValueError as v_error:

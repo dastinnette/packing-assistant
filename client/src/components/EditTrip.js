@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,12 +11,13 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function EditTrip({ location }){
-    const [trip, setTrip] = useState(null)
+function EditTrip({ tripDetails, location, setTrip }){
+    const {tripId} = useParams()
+    // const [trip, setTrip] = useState(null)
     const {user} = useOutletContext()
     const nav = useNavigate()
 
-    const newTripSchema = yup.object().shape({
+    const editTripSchema = yup.object().shape({
         date: yup.string().min(10, 'Date must be YYYY-MM-DD').max(10, 'Date must be YYYY-MM-DD').required('Date required!'),
         packing_list: yup.string().required('You must bring clothes on your trip!')
     })
@@ -24,25 +26,26 @@ function EditTrip({ location }){
         initialValues: {
             user_id: user.id,
             location_id: location.id,
-            date: '',
-            packing_list: ''
+            date: tripDetails.date,
+            packing_list: tripDetails.packing_list
         },
-        validationSchema: newTripSchema,
+        validationSchema: editTripSchema,
         onSubmit: (values) => {
-            fetch('/trips', {
-                method: 'POST',
+            console.log(values)
+            fetch(`/trips/${tripId}`, {
+                method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(values)
             }).then((resp) => {
                 if (resp.ok) {
-                    resp.json().then(({ trip }) => {
+                    resp.json().then(( trip ) => {
                         setTrip(trip)
-                        nav('/trips')
+                        nav(`/trips/${tripId}`)
                     })
                 } else {
-                    console.log('error posting trip')
+                    console.log('error editing trip')
                 }
             })
         }
@@ -53,7 +56,7 @@ function EditTrip({ location }){
             <br></br>
             <br></br>
             <br></br>
-            <h3 class="text-center">Edit your trip plans to {location.name}</h3>
+            <h3 className="text-center">Edit your trip plans to {location.name}</h3>
             <Row className="justify-content-md-center">
                 <Col lg="6">
                     {Object.keys(formik.errors).map((key) => <li>{formik.errors[key]}</li>)}

@@ -29,10 +29,6 @@ function TripPage(){
         })
     },[])
 
-    function handleEdit(){
-        
-    }
-
     function toggleEdit(){
         setEditTrip((currentEditTrip) => !currentEditTrip)
     }
@@ -72,7 +68,7 @@ function TripPage(){
                     </Card>
                 </Col>
                 <Col>
-                    {editTrip && <EditTrip location={trip.location}/>}
+                    {editTrip && <EditTrip tripDetails={trip} location={trip.location} setTrip={setTrip}/>}
                 </Col>
             </Row>
         </Container>

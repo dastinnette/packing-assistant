@@ -53,7 +53,7 @@ function CreateTrip({ location }){
             <br></br>
             <br></br>
             <br></br>
-            <h3 class="text-center">Plan for your trip to {location.name}</h3>
+            <h3 className="text-center">Plan for your trip to {location.name}</h3>
             <Row className="justify-content-md-center">
                 <Col lg="6">
                     {Object.keys(formik.errors).map((key) => <li>{formik.errors[key]}</li>)}
