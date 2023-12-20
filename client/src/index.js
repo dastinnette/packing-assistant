@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./components/HomePage";
 import LocationsPage from "./components/LocationsPage";
 import LocationPage from "./components/LocationPage";
+import TripsPage from "./components/TripsPage";
+import TripPage from "./components/TripPage";
 
 const routes = [
     {
@@ -22,6 +24,14 @@ const routes = [
             {
                 path: '/locations/:locationId',
                 element: <LocationPage />,
+            },
+            {
+                path: '/trips',
+                element: <TripsPage />
+            },
+            {
+                path: '/trips/:tripId',
+                element: <TripPage />,
             },
         ],
     },

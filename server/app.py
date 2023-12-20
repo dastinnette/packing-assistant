@@ -42,7 +42,62 @@ class Trips(Resource):
     def get(self):
         return [[trip.to_dict() for trip in Trip.query.all()], 200]
 
+    def post(self):
+        data = request.get_json()
+        input_date = data['date'].split('-')
+        dateObj = datetime.date(int(input_date[0]), int(input_date[1]), int(input_date[2]))
+        new_trip = Trip(
+            user_id = data['user_id'],
+            location_id = data['location_id'],
+            date = dateObj,
+            packing_list = data['packing_list']
+        )
+        db.session.add(new_trip)
+        db.session.commit()
+        return make_response(new_trip.to_dict(), 201)
+    
 api.add_resource(Trips, '/api/v1/trips')
+
+class TripById(Resource):
+    def get(self, id):
+        trip = Trip.query.get(id)
+        if not trip:
+            return make_response({'error': 'trip not found'}, 404)
+        return make_response(trip.to_dict(), 200)
+    
+    def patch(self, id):
+        trip = Trip.query.filter_by(id=id).first()
+        if trip:
+            try:
+                data = request.get_json()
+                input_date = data['date'].split('-')
+                dateObj = datetime.date(int(input_date[0]), int(input_date[1]), int(input_date[2]))
+                setattr(trip, 'user_id', data['user_id'])
+                setattr(trip, 'location_id', data['location_id'])
+                setattr(trip, 'date', dateObj)
+                setattr(trip, 'packing_list', data['packing_list'])
+                # data = {
+                #     'user_id': int(params['user_id']),
+                #     'location_id': int(params['location_id'])
+                # }
+                # for attr in data:
+                #     setattr(trip, attr, data[attr])
+                db.session.commit()
+                return make_response(trip.to_dict(), 202)
+            except ValueError as v_error:
+                return make_response({"error": str(v_error)}, 400)
+        else:
+            return make_response({"error": "Trip not found"}, 404)
+    
+    def delete(self, id):
+        trip = Trip.query.filter_by(id=id).first()
+        if not trip:
+            return make_response({'error': 'trip not found'}, 404)
+        db.session.delete(trip)
+        db.session.commit()
+        return make_response('', 204)
+
+api.add_resource(TripById, '/api/v1/trips/<int:id>')
 
 @app.route('/api/v1/authorized')
 def authorized():

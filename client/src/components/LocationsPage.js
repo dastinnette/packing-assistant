@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import LocationCard from "./LocationCard";
 
@@ -11,9 +10,11 @@ function LocationsPage(){
     
     return (
         <Container>
+            <br></br>
             <Row>
                 {locationCards}
             </Row>
+            <br></br>
         </Container>
     )
 }

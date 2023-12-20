@@ -57,14 +57,15 @@ function Signup({ setUser }) {
 
     return (
         <Container>
-            <div>
+            <br></br>
+            <div className='text-center'>
                 <h1>Welcome to Pack Assist</h1>
-                <p>Please sign up or log in below</p>
             </div>
+            <br></br>
             <Row className="justify-content-md-center">
                 <Col lg="6">
                     {Object.keys(formik.errors).map((key) => <li>{formik.errors[key]}</li>)}
-                    <Button onClick={toggleSignup}>{signup ? 'Login instead!' : 'Register for an account'}</Button>
+                    
                     <Form onSubmit={formik.handleSubmit}>
 
                         <Form.Group>
@@ -109,10 +110,9 @@ function Signup({ setUser }) {
                                 onChange={formik.handleChange}
                             />
                         </Form.Group>}
-                        
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                        <br></br>
+                            <Button variant="primary" type="submit">Submit</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button onClick={toggleSignup}>{signup ? 'Click here to login' : 'Click here to register'}</Button>
                     </Form>
                 </Col>
             </Row>

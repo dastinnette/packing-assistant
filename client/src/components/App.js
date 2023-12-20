@@ -41,7 +41,6 @@ function App() {
     return (
       <Container>
         <NavBar setUser={setUser}/>
-        {/* <Button variant="primary" onClick={handleLogout}>Logout</Button> */}
         <Outlet context={context}/>
       </Container>
     ) 
