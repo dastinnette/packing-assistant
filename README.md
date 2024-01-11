@@ -10,7 +10,13 @@ This is a full-stack application that was created as a final project for Flatiro
 
 ## Project Breakdown
 
+#### Login
+
+This project uses an Auth token to confirm and persist user details. Users can create an account or login using an existing account and password.
+
 #### Locations
+
+Once logged in, users can browse "Locations" to find one they like and plan a trip. 
 
 #### Trips
 
