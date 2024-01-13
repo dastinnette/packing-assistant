@@ -16,7 +16,7 @@ This project uses an Auth token to confirm and persist user details. Users can c
 
 #### Locations
 
-Once logged in, users can browse "Locations" to find one they like and plan a trip. 
+Once logged in, users can browse "Locations" to find one they like and plan a trip. The user can then user the form on each location page to book a trip with a corresponding date and see that trip appear in the `/trips` route.
 
 #### Trips
 
