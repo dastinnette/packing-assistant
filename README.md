@@ -20,7 +20,7 @@ Once logged in, users can browse "Locations" to find one they like and plan a tr
 
 #### Trips
 
-Once you've found a location you'd like to visit, click `Create a Trip` ... 
+Once you've found a location you'd like to visit, click `Create a Trip` to view a form with a date and a text field for a packing list. 
 
 ---
 
