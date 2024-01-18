@@ -4,7 +4,7 @@
 
 Welcome to Pack Assist, a vacation planning app that helps travelers plan packing lists for a variety of locations, associated weather conditions and much, much more. 
 
-This is a full-stack application that was created as a final project for Flatiron School's software engineering course. It makes use of a Flask backend using Flask-SQLAlchemy and SQLite, and it has a React frontend that uses React Bootstrap components for added functionality and styling.
+This is a full-stack application that was created as a final project for Flatiron School's software engineering course. It makes use of a Flask backend using Flask-SQLAlchemy and SQLite, and it has a React frontend that uses React Bootstrap components for functionality and styling.
 
 ---
 
